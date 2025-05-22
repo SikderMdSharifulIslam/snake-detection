@@ -17,7 +17,7 @@ A comprehensive system for detecting and identifying snake species from images u
 
 ## Promo Video URL
 
-https://drive.google.com/drive/folders/1keX0bZFeIGuYo4IqkyGGvPN8S3thi0tO
+[https://drive.google.com/drive/folders/1keX0bZFeIGuYo4IqkyGGvPN8S3thi0tO](https://drive.google.com/file/d/18eU_BX0o0N6W47Kl-KqGE6wYwrAjzukv/view?usp=sharing)
 
 ## Installation and Setup
 
