@@ -17,7 +17,8 @@ A comprehensive system for detecting and identifying snake species from images u
 
 ## Demo Video
 
-https://github.com/SikderMdSharifulIslam/snake-detection/raw/main/videos/snakeGuardPlusProjectVideo.mp4
+<video src="https://github.com/SikderMdSharifulIslam/snake-detection/blob/main/videos/snakeGuardPlusProjectVideo.mp4" controls="controls" style="max-width: 730px;">
+</video>
 
 ## Installation and Setup
 
