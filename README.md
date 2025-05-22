@@ -15,6 +15,10 @@ A comprehensive system for detecting and identifying snake species from images u
 - **User-Friendly Interface**: Simple and intuitive web interface for easy interaction
 - **Mobile-Responsive Design**: Access the application from any device
 
+## Demo Video
+
+https://github.com/SikderMdSharifulIslam/snake-detection/raw/main/videos/snakeGuardPlusProjectVideo.mp4
+
 ## Installation and Setup
 
 ### Prerequisites
@@ -107,6 +111,8 @@ snake-detection/
 │           └── weights/
 │               └── best.pt         # Trained model weights
 ├── dataset/                        # Training dataset
+├── videos/                         # Demo videos
+│   └── snakeGuardPlusProjectVideo.mp4  # Project demo video
 ├── snake_server.py                 # Python server for handling requests
 ├── predict_snake.py                # Script for snake prediction
 ├── another.py                      # Training script
