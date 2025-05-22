@@ -2,7 +2,7 @@
 
 A comprehensive system for detecting and identifying snake species from images using deep learning. This project combines a YOLO-based object detection model with a user-friendly web interface to help users identify snake species, determine if they are venomous, and learn more about them.
 
-![Snake Detection Demo](frontend/snakeGuardPlus/anaconda.png)
+![Snake Detection Demo](1.png)
 
 ## Features
 
@@ -27,7 +27,7 @@ A comprehensive system for detecting and identifying snake species from images u
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/yourusername/snake-detection.git
+   git clone https://github.com/SikderMdSharifulIslam/snake-detection.git
    cd snake-detection
    ```
 
@@ -165,5 +165,4 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 ## Contact
 
 For any questions or suggestions, please contact:
-- Email: your.email@example.com
-- GitHub: [Your GitHub Profile](https://github.com/yourusername)
+- GitHub: [SikderMdSharifulIslam](https://github.com/SikderMdSharifulIslam)
