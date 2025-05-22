@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SnakeGuard Plus - Rescue Request</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #0a1a1a;
+      color: #fff;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    h1 {
+      text-align: center;
+      color: #00ffcc;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      background-color: #1abc9c;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+      color: #000;
+    }
+
+    input, textarea, select {
+      padding: 10px;
+      border: none;
+      border-radius: 8px;
+      font-size: 1em;
+    }
+
+    button {
+      padding: 12px;
+      background-color: #16a085;
+      border: none;
+      border-radius: 8px;
+      color: #fff;
+      cursor: pointer;
+      font-size: 1em;
+    }
+
+    button:hover {
+      background-color: #138d75;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <h1>Snake Rescue Request</h1>
+    <form id="rescueForm">
+      <input type="text" name="name" placeholder="Your Name" required />
+      <input type="tel" name="phone" placeholder="Phone Number" required />
+      <input type="text" name="location" placeholder="Location of Incident" required />
+      <select name="snakeType" required>
+        <option value="">Select Snake Type</option>
+        <option value="venomous">Venomous</option>
+        <option value="non-venomous">Non-venomous</option>
+        <option value="unknown">Unknown</option>
+      </select>
+      <textarea name="description" rows="4" placeholder="Describe the situation..." required></textarea>
+      <button type="submit">Submit Rescue Request</button>
+    </form>
+    <a href="index.html" style="color: #00ffcc; display: block; margin-top: 30px; text-align: center;">← Back to Home</a>
+  </div>
+
+  <script>
+    document.getElementById('rescueForm').addEventListener('submit', function(event) {
+      event.preventDefault();
+      alert("Your rescue request has been submitted successfully. We will contact you shortly.");
+      this.reset();
+    });
+  </script>
+</body>
+
+</html>

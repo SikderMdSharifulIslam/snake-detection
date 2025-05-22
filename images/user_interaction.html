@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Interaction Flow</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: white;
+        }
+        .diagram {
+            width: 800px;
+            height: 600px;
+            margin: 20px auto;
+            position: relative;
+        }
+        .actor {
+            width: 60px;
+            height: 100px;
+            position: absolute;
+            text-align: center;
+        }
+        .actor-head {
+            width: 40px;
+            height: 40px;
+            background-color: white;
+            border: 2px solid #00a278;
+            border-radius: 50%;
+            margin: 0 auto;
+        }
+        .actor-body {
+            width: 60px;
+            height: 60px;
+            background-color: white;
+            border: 2px solid #00a278;
+            border-radius: 10px 10px 0 0;
+            margin-top: -2px;
+        }
+        .actor-label {
+            margin-top: 5px;
+            font-size: 12px;
+        }
+        .usecase {
+            width: 150px;
+            height: 60px;
+            background-color: white;
+            border: 2px solid #00a278;
+            border-radius: 30px;
+            text-align: center;
+            line-height: 60px;
+            position: absolute;
+        }
+        .system {
+            width: 500px;
+            height: 400px;
+            border: 2px solid #00a278;
+            border-radius: 10px;
+            position: absolute;
+            left: 150px;
+            top: 100px;
+        }
+        .system-label {
+            position: absolute;
+            top: -10px;
+            left: 20px;
+            background-color: white;
+            padding: 0 10px;
+            font-weight: bold;
+            color: #00a278;
+        }
+        .arrow {
+            position: absolute;
+            height: 2px;
+            background-color: #00a278;
+            transform-origin: 0 50%;
+        }
+        .arrow:after {
+            content: "";
+            position: absolute;
+            right: 0;
+            top: -4px;
+            width: 0;
+            height: 0;
+            border-top: 5px solid transparent;
+            border-bottom: 5px solid transparent;
+            border-left: 8px solid #00a278;
+        }
+        .note {
+            position: absolute;
+            width: 150px;
+            padding: 10px;
+            background-color: #f5f5f5;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 12px;
+            line-height: 1.4;
+        }
+        h1 {
+            text-align: center;
+            color: #00a278;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>SnakeGuard Plus - User Interaction Flow</h1>
+    <div class="diagram">
+        <!-- System boundary -->
+        <div class="system">
+            <div class="system-label">SnakeGuard Plus</div>
+            
+            <!-- Use cases -->
+            <div class="usecase" style="left: 50px; top: 50px;">Upload Snake Image</div>
+            <div class="usecase" style="left: 300px; top: 50px;">Identify Snake Species</div>
+            <div class="usecase" style="left: 50px; top: 150px;">View Snake Information</div>
+            <div class="usecase" style="left: 300px; top: 150px;">Get Safety Recommendations</div>
+            <div class="usecase" style="left: 50px; top: 250px;">Search Snake Database</div>
+            <div class="usecase" style="left: 300px; top: 250px;">View Hospital Information</div>
+            <div class="usecase" style="left: 175px; top: 330px;">Submit Rescue Request</div>
+        </div>
+        
+        <!-- Actors -->
+        <div class="actor" style="left: 50px; top: 250px;">
+            <div class="actor-head"></div>
+            <div class="actor-body"></div>
+            <div class="actor-label">User</div>
+        </div>
+        
+        <div class="actor" style="left: 700px; top: 150px;">
+            <div class="actor-head"></div>
+            <div class="actor-body"></div>
+            <div class="actor-label">Snake Expert</div>
+        </div>
+        
+        <div class="actor" style="left: 700px; top: 350px;">
+            <div class="actor-head"></div>
+            <div class="actor-body"></div>
+            <div class="actor-label">Emergency Services</div>
+        </div>
+        
+        <!-- Arrows -->
+        <div class="arrow" style="left: 110px; top: 250px; width: 40px;"></div>
+        <div class="arrow" style="left: 110px; top: 270px; width: 40px; transform: rotate(45deg);"></div>
+        <div class="arrow" style="left: 110px; top: 230px; width: 40px; transform: rotate(-45deg);"></div>
+        <div class="arrow" style="left: 200px; top: 50px; width: 100px;"></div>
+        <div class="arrow" style="left: 300px; top: 80px; width: 50px; transform: rotate(90deg);"></div>
+        <div class="arrow" style="left: 200px; top: 150px; width: 100px;"></div>
+        <div class="arrow" style="left: 650px; top: 150px; width: 50px; transform: rotate(180deg);"></div>
+        <div class="arrow" style="left: 325px; top: 330px; width: 375px;"></div>
+        
+        <!-- Notes -->
+        <div class="note" style="left: 300px; top: 500px;">
+            <strong>Core Functionality</strong><br>
+            AI-powered snake species identification using YOLO model with 94% accuracy.
+        </div>
+        <div class="note" style="left: 500px; top: 500px;">
+            <strong>Safety Critical</strong><br>
+            Provides guidance based on venomous status of identified snake.
+        </div>
+    </div>
+</body>
+</html>

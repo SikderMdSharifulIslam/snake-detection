@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SnakeGuard Plus - Snake Details</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #0a1a1a;
+      color: #fff;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    h1 {
+      text-align: center;
+      color: #00ffcc;
+    }
+
+    input[type="text"] {
+      width: 100%;
+      padding: 12px;
+      border: none;
+      border-radius: 8px;
+      margin-top: 20px;
+    }
+
+    button {
+      padding: 10px 20px;
+      background-color: #1abc9c;
+      border: none;
+      border-radius: 8px;
+      color: #fff;
+      margin-top: 10px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #16a085;
+    }
+
+    .snake-info {
+      margin-top: 30px;
+      background-color: #1abc9c;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+      color: #000;
+    }
+
+    .snake-info img {
+      max-width: 100%;
+      border-radius: 8px;
+      margin-bottom: 15px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <h1>Search Snake Details</h1>
+    <input type="text" id="snakeName" placeholder="Enter snake name (e.g. cobra, python)" />
+    <button onclick="searchSnake()">Search</button>
+
+    <div id="result" class="snake-info" style="display: none;"></div>
+
+    <a href="index.html" style="color: #00ffcc; display: block; margin-top: 30px;">← Back to Home</a>
+  </div>
+
+  <script>
+    const snakeDatabase = {
+      cobra: {
+        name: "Cobra",
+        image: "https://static.vecteezy.com/system/resources/thumbnails/053/389/630/small_2x/majestic-cobra-in-natural-habitat-on-sunlit-earthy-terrain-photo.jpg",
+        description: "Cobras are venomous snakes known for their hood and threat display.",
+        habitat: "Forests, grasslands, and agricultural areas.",
+        venom: "Neurotoxic venom affecting respiratory and nervous systems."
+      },
+      python: {
+        name: "Python",
+        image: "https://cdn.britannica.com/28/239528-050-D89C8118/reticulated-python-Malayopython-reticulatus.jpg",
+        description: "Pythons are non-venomous constrictors that kill prey by wrapping around it.",
+        habitat: "Rainforests, grasslands, and swamps.",
+        venom: "Non-venomous."
+      },
+      viper: {
+        name: "Viper",
+        image: "https://ychef.files.bbci.co.uk/1280x720/p09dk5rq.jpg",
+        description: "Vipers are venomous snakes with long fangs that inject hemotoxic venom.",
+        habitat: "Various terrains including deserts and forests.",
+        venom: "Hemotoxic venom that damages tissue and blood cells."
+      }
+    };
+
+    function searchSnake() {
+      const name = document.getElementById("snakeName").value.toLowerCase();
+      const resultDiv = document.getElementById("result");
+      if (snakeDatabase[name]) {
+        const snake = snakeDatabase[name];
+        resultDiv.innerHTML = `
+          <h2>${snake.name}</h2>
+          <img src="${snake.image}" alt="${snake.name}" />
+          <p><strong>Description:</strong> ${snake.description}</p>
+          <p><strong>Habitat:</strong> ${snake.habitat}</p>
+          <p><strong>Venom:</strong> ${snake.venom}</p>
+        `;
+        resultDiv.style.display = 'block';
+      } else {
+        resultDiv.innerHTML = `<p>No data found for "${name}". Try 'cobra', 'python', or 'viper'.</p>`;
+        resultDiv.style.display = 'block';
+      }
+    }
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SnakeGuard Plus - Snake Identification</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #0a1a1a;
+      color: #fff;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    h1 {
+      text-align: center;
+      color: #00ffcc;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      background-color: #1abc9c;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+      color: #000;
+    }
+
+    input[type="file"] {
+      padding: 10px;
+      background-color: #fff;
+      border-radius: 8px;
+      border: none;
+    }
+
+    button {
+      padding: 12px;
+      background-color: #16a085;
+      border: none;
+      border-radius: 8px;
+      color: #fff;
+      cursor: pointer;
+      font-size: 1em;
+    }
+
+    button:hover {
+      background-color: #138d75;
+    }
+
+    #result {
+      margin-top: 20px;
+      background-color: #ffffff11;
+      padding: 15px;
+      border-radius: 8px;
+      text-align: center;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <h1>Snake Identification</h1>
+    <form id="identifyForm">
+      <input type="file" id="snakeImage" accept="image/*" required />
+      <button type="submit">Identify Snake</button>
+    </form>
+    <div id="result"></div>
+    <a href="index.html" style="color: #00ffcc; display: block; margin-top: 30px; text-align: center;">← Back to Home</a>
+  </div>
+
+  <script>
+    document.getElementById('identifyForm').addEventListener('submit', async function(event) {
+      event.preventDefault();
+      const resultDiv = document.getElementById('result');
+      const fileInput = document.getElementById('snakeImage');
+
+      if (!fileInput.files[0]) {
+        resultDiv.innerHTML = "Please select an image.";
+        return;
+      }
+
+      const formData = new FormData();
+      formData.append('file', fileInput.files[0]);
+
+      resultDiv.innerHTML = 'Analyzing image...';
+
+      try {
+        const response = await fetch('http://localhost:5000/predict', {
+          method: 'POST',
+          body: formData
+        });
+
+        const data = await response.json();
+
+        if (data.error) {
+          resultDiv.innerHTML = `Error: ${data.error}`;
+        } else {
+          resultDiv.innerHTML = `
+            <strong>Identified:</strong> ${data.species}<br>
+            <strong>Status:</strong> ${data.status}<br>
+            <strong>Recommended Action:</strong> ${data.action}
+          `;
+        }
+      } catch (error) {
+        console.error(error);
+        resultDiv.innerHTML = 'Error processing the image.';
+      }
+    });
+  </script>
+</body>
+
+</html>

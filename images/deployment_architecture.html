@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deployment Architecture</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: white;
+        }
+        .diagram {
+            width: 800px;
+            height: 600px;
+            margin: 20px auto;
+            position: relative;
+        }
+        .node {
+            position: absolute;
+            width: 180px;
+            background-color: white;
+            border: 2px solid #00a278;
+            border-radius: 5px;
+            padding-bottom: 10px;
+        }
+        .node-title {
+            background-color: #00a278;
+            color: white;
+            padding: 5px;
+            text-align: center;
+            border-radius: 3px 3px 0 0;
+            font-weight: bold;
+        }
+        .artifact {
+            margin: 10px;
+            padding: 5px;
+            background-color: #f5f5f5;
+            border: 1px solid #ddd;
+            border-radius: 3px;
+            text-align: center;
+            font-size: 12px;
+        }
+        .database {
+            position: absolute;
+            width: 180px;
+            height: 120px;
+            background-color: white;
+            border: 2px solid #00a278;
+            border-radius: 5px;
+            text-align: center;
+        }
+        .database-title {
+            background-color: #00a278;
+            color: white;
+            padding: 5px;
+            text-align: center;
+            border-radius: 3px 3px 0 0;
+            font-weight: bold;
+        }
+        .database-cylinder {
+            width: 120px;
+            height: 60px;
+            margin: 10px auto;
+            background-color: #f5f5f5;
+            border: 1px solid #ddd;
+            border-radius: 60px / 25px;
+            position: relative;
+        }
+        .database-cylinder:before {
+            content: "";
+            position: absolute;
+            width: 120px;
+            height: 25px;
+            top: -5px;
+            left: 0;
+            background-color: #f5f5f5;
+            border: 1px solid #ddd;
+            border-radius: 60px / 25px;
+            border-bottom: none;
+        }
+        .arrow {
+            position: absolute;
+            height: 2px;
+            background-color: #00a278;
+            transform-origin: 0 50%;
+        }
+        .arrow:after {
+            content: "";
+            position: absolute;
+            right: 0;
+            top: -4px;
+            width: 0;
+            height: 0;
+            border-top: 5px solid transparent;
+            border-bottom: 5px solid transparent;
+            border-left: 8px solid #00a278;
+        }
+        .note {
+            position: absolute;
+            width: 150px;
+            padding: 10px;
+            background-color: #f5f5f5;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 12px;
+            line-height: 1.4;
+        }
+        h1 {
+            text-align: center;
+            color: #00a278;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>SnakeGuard Plus - Deployment Architecture</h1>
+    <div class="diagram">
+        <!-- Nodes -->
+        <div class="node" style="left: 50px; top: 50px; height: 120px;">
+            <div class="node-title">Client Device</div>
+            <div class="artifact">Web Browser</div>
+            <div class="artifact">Mobile App</div>
+        </div>
+        
+        <div class="node" style="left: 300px; top: 50px; height: 120px;">
+            <div class="node-title">Web Server</div>
+            <div class="artifact">HTTP Server</div>
+            <div class="artifact">Static Files</div>
+        </div>
+        
+        <div class="node" style="left: 550px; top: 50px; height: 150px;">
+            <div class="node-title">Application Server</div>
+            <div class="artifact">Snake Detection Service</div>
+            <div class="artifact">Image Processing Service</div>
+            <div class="artifact">Snake Information Service</div>
+        </div>
+        
+        <div class="node" style="left: 300px; top: 250px; height: 120px;">
+            <div class="node-title">ML Server</div>
+            <div class="artifact">YOLO Model</div>
+            <div class="artifact">Inference Engine</div>
+        </div>
+        
+        <div class="database" style="left: 50px; top: 250px;">
+            <div class="database-title">Database Server</div>
+            <div class="database-cylinder"></div>
+        </div>
+        
+        <div class="node" style="left: 550px; top: 250px; height: 120px;">
+            <div class="node-title">File Storage</div>
+            <div class="artifact">Uploaded Images</div>
+            <div class="artifact">Processed Images</div>
+        </div>
+        
+        <!-- Arrows -->
+        <div class="arrow" style="left: 230px; top: 100px; width: 70px;"></div>
+        <div class="arrow" style="left: 480px; top: 100px; width: 70px;"></div>
+        <div class="arrow" style="left: 300px; top: 170px; width: 2px; height: 80px; transform: rotate(90deg);"></div>
+        <div class="arrow" style="left: 550px; top: 170px; width: 2px; height: 80px; transform: rotate(90deg);"></div>
+        <div class="arrow" style="left: 230px; top: 300px; width: 70px;"></div>
+        <div class="arrow" style="left: 420px; top: 300px; width: 130px;"></div>
+        
+        <!-- Notes -->
+        <div class="note" style="left: 50px; top: 400px;">
+            <strong>Client Device</strong><br>
+            End-user devices: Desktop, mobile, tablet with responsive web interface.
+        </div>
+        <div class="note" style="left: 300px; top: 400px;">
+            <strong>ML Server</strong><br>
+            GPU-accelerated for faster inference. Runs YOLO v8 model.
+        </div>
+        <div class="note" style="left: 550px; top: 400px;">
+            <strong>File Storage</strong><br>
+            Secure storage for user-uploaded images and processed results.
+        </div>
+    </div>
+</body>
+</html>

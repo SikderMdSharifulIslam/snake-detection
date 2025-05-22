@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SnakeGuard Plus</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #0f1b1d;
+      color: white;
+    }
+    .container {
+      padding: 2rem;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.5rem;
+      max-width: 1200px;
+      margin: auto;
+    }
+    .card {
+      background-color: #00c28b;
+      border-radius: 20px;
+      padding: 1.5rem;
+      text-align: center;
+      position: relative;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    }
+    .card img {
+      max-width: 70px;
+      margin-bottom: 1rem;
+    }
+    .card h3 {
+      font-size: 1rem;
+      margin: 0;
+      color: white;
+    }
+    .plus-icon {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      font-size: 1.2rem;
+      background: #ffffff22;
+      border-radius: 50%;
+      width: 25px;
+      height: 25px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 1rem 2rem;
+    }
+    header img {
+      height: 60px;
+    }
+    header h1 {
+      font-size: 1.5rem;
+      color: #00c28b;
+      margin: 0;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <img src="snakeGuard+_logoWhite.png" alt="Logo" />
+    <h1>SnakeGuard Plus</h1>
+  </header>
+
+  <div class="container">
+    <div class="card">
+      <a href="identifySnake.html">
+        <div class="plus-icon">+</div>
+      </a>
+      <img src="anaconda.png" alt="Snake" />
+      <h3>Snake identification<br>from snake image</h3>
+    </div>
+    <div class="card">
+      <a href="seachSnake.html">
+        <div class="plus-icon">+</div>
+      </a>
+      <img src="herping.png" alt="Search" />
+      <h3>Snake details<br>by searching name</h3>
+    </div>
+    <div class="card">
+      <a href="myth.html">
+        <div class="plus-icon">+</div>
+      </a>
+      <img src="spell-book.png" alt="Myths" />
+      <h3>Myths</h3>
+    </div>
+    <div class="card">
+      <a href="about_us.html">
+        <div class="plus-icon">+</div>
+      </a>
+      <img src="profile.png" alt="About" />
+      <h3>About us</h3>
+    </div>
+    <div class="card">
+      <a href="hospital.html">
+        <div class="plus-icon">+</div>
+      </a>
+      <img src="hospital.png" alt="Hospital" />
+      <h3>Hospital information</h3>
+    </div>
+    <div class="card">
+      <a href="rescueSnake.html">
+        <div class="plus-icon">+</div>
+      </a>
+      <img src="medical-services.png" alt="Rescue" />
+      <h3>Snake rescue request</h3>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generate PNG Images</title>
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            line-height: 1.6;
+        }
+        h1 {
+            color: #00a278;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .btn {
+            display: inline-block;
+            background-color: #00a278;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 4px;
+            margin: 10px 0;
+            cursor: pointer;
+        }
+        .btn:hover {
+            background-color: #008060;
+        }
+        .instructions {
+            background-color: #f5f5f5;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+        iframe {
+            width: 100%;
+            height: 650px;
+            border: 1px solid #ddd;
+            margin-bottom: 20px;
+        }
+        #result {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #f5f5f5;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Generate PNG Images from HTML Diagrams</h1>
+        
+        <div class="instructions">
+            <h2>Instructions</h2>
+            <p>This tool will help you generate PNG images from the HTML diagrams:</p>
+            <ol>
+                <li>Select a diagram from the dropdown</li>
+                <li>Click "Load Diagram" to display it in the iframe below</li>
+                <li>Click "Generate PNG" to create a PNG image</li>
+                <li>Right-click on the generated image and select "Save Image As..."</li>
+                <li>Save the image to the images folder with the appropriate name</li>
+            </ol>
+        </div>
+        
+        <div>
+            <select id="diagramSelect">
+                <option value="system_architecture">System Architecture</option>
+                <option value="data_flow">Data Flow</option>
+                <option value="component_interaction">Component Interaction</option>
+                <option value="user_interaction">User Interaction</option>
+                <option value="deployment_architecture">Deployment Architecture</option>
+            </select>
+            <button id="loadBtn" class="btn">Load Diagram</button>
+            <button id="generateBtn" class="btn">Generate PNG</button>
+        </div>
+        
+        <iframe id="diagramFrame" src=""></iframe>
+        
+        <div id="result"></div>
+    </div>
+    
+    <script>
+        // Get elements
+        const diagramSelect = document.getElementById('diagramSelect');
+        const loadBtn = document.getElementById('loadBtn');
+        const generateBtn = document.getElementById('generateBtn');
+        const diagramFrame = document.getElementById('diagramFrame');
+        const result = document.getElementById('result');
+        
+        // Load diagram
+        loadBtn.addEventListener('click', function() {
+            const selectedDiagram = diagramSelect.value;
+            diagramFrame.src = `${selectedDiagram}.html`;
+        });
+        
+        // Generate PNG
+        generateBtn.addEventListener('click', function() {
+            const selectedDiagram = diagramSelect.value;
+            
+            // Check if diagram is loaded
+            if (!diagramFrame.src.includes(selectedDiagram)) {
+                result.innerHTML = '<p style="color: red;">Please load the diagram first!</p>';
+                return;
+            }
+            
+            result.innerHTML = '<p>Generating PNG image... Please wait.</p>';
+            
+            // Get the iframe document
+            const iframeDoc = diagramFrame.contentDocument || diagramFrame.contentWindow.document;
+            
+            // Find the diagram element
+            const diagram = iframeDoc.querySelector('.diagram');
+            
+            if (!diagram) {
+                result.innerHTML = '<p style="color: red;">Could not find diagram element!</p>';
+                return;
+            }
+            
+            // Generate PNG using html2canvas
+            html2canvas(diagram).then(canvas => {
+                // Create image
+                const imgData = canvas.toDataURL('image/png');
+                
+                // Display image
+                result.innerHTML = `
+                    <p>PNG image generated! Right-click on the image below and select "Save Image As..."</p>
+                    <p>Save it as "${selectedDiagram}.png" in the images folder.</p>
+                    <img src="${imgData}" alt="${selectedDiagram}" style="max-width: 100%; border: 1px solid #ddd;">
+                    <a href="${imgData}" download="${selectedDiagram}.png" class="btn" style="margin-top: 10px;">Download PNG</a>
+                `;
+            }).catch(err => {
+                result.innerHTML = `<p style="color: red;">Error generating PNG: ${err.message}</p>`;
+            });
+        });
+        
+        // Load the first diagram by default
+        window.onload = function() {
+            loadBtn.click();
+        };
+    </script>
+</body>
+</html>

@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Snake Identification - SnakeGuard Plus</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #0f1b1d;
+      color: white;
+    }
+    header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 1rem 2rem;
+    }
+    header img {
+      height: 60px;
+    }
+    header h1 {
+      font-size: 1.5rem;
+      color: #00c28b;
+      margin: 0;
+    }
+    .container {
+      max-width: 800px;
+      margin: 2rem auto;
+      padding: 2rem;
+      background-color: #1a2a2d;
+      border-radius: 20px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    }
+    .upload-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.5rem;
+    }
+    .upload-area {
+      width: 100%;
+      max-width: 500px;
+      height: 300px;
+      border: 2px dashed #00c28b;
+      border-radius: 10px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    .upload-area:hover {
+      background-color: rgba(0, 194, 139, 0.1);
+    }
+    .upload-area p {
+      color: #ccc;
+      margin-top: 1rem;
+    }
+    .upload-area img {
+      max-width: 70px;
+      margin-bottom: 1rem;
+    }
+    .upload-area input[type="file"] {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      opacity: 0;
+      cursor: pointer;
+    }
+    .preview-container {
+      width: 100%;
+      max-width: 500px;
+      display: none;
+    }
+    .preview-container img {
+      width: 100%;
+      border-radius: 10px;
+      margin-bottom: 1rem;
+    }
+    .btn {
+      background-color: #00c28b;
+      color: white;
+      border: none;
+      padding: 0.8rem 2rem;
+      border-radius: 50px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    .btn:hover {
+      background-color: #00a070;
+    }
+    .btn:disabled {
+      background-color: #666;
+      cursor: not-allowed;
+    }
+    .back-link {
+      display: inline-block;
+      margin-top: 2rem;
+      color: #00c28b;
+      text-decoration: none;
+    }
+    .back-link:hover {
+      text-decoration: underline;
+    }
+    .result-container {
+      margin-top: 2rem;
+      display: none;
+    }
+    .result-container h2 {
+      color: #00c28b;
+      margin-bottom: 1rem;
+    }
+    .loader {
+      display: none;
+      width: 48px;
+      height: 48px;
+      border: 5px solid #00c28b;
+      border-bottom-color: transparent;
+      border-radius: 50%;
+      animation: rotation 1s linear infinite;
+      margin: 2rem auto;
+    }
+    @keyframes rotation {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <a href="/frontend/snakeGuardPlus/index.html">
+      <img src="snakeGuard+_logoWhite.png" alt="Logo" />
+    </a>
+    <h1>Snake Identification</h1>
+  </header>
+
+  <div class="container">
+    <div class="upload-container">
+      <h2>Upload a Snake Image</h2>
+      <p>Upload a clear image of a snake to identify its species</p>
+
+      <form id="uploadForm" enctype="multipart/form-data">
+        <div class="upload-area" id="uploadArea">
+          <img src="anaconda.png" alt="Upload" />
+          <p>Click or drag and drop an image here</p>
+          <input type="file" id="fileInput" name="image" accept="image/*" />
+        </div>
+
+        <div class="preview-container" id="previewContainer">
+          <img id="imagePreview" src="#" alt="Preview" />
+          <button type="button" class="btn" id="identifyBtn" disabled>Identify Snake</button>
+        </div>
+      </form>
+
+      <div class="loader" id="loader"></div>
+
+      <div class="result-container" id="resultContainer">
+        <h2>Identification Result</h2>
+        <div id="resultContent"></div>
+      </div>
+    </div>
+
+    <a href="/frontend/snakeGuardPlus/index.html" class="back-link">← Back to Home</a>
+  </div>
+
+  <script>
+    const fileInput = document.getElementById('fileInput');
+    const uploadArea = document.getElementById('uploadArea');
+    const previewContainer = document.getElementById('previewContainer');
+    const imagePreview = document.getElementById('imagePreview');
+    const identifyBtn = document.getElementById('identifyBtn');
+    const loader = document.getElementById('loader');
+    const resultContainer = document.getElementById('resultContainer');
+    const resultContent = document.getElementById('resultContent');
+    const uploadForm = document.getElementById('uploadForm');
+
+    // Handle file selection
+    fileInput.addEventListener('change', function() {
+      const file = this.files[0];
+      if (file) {
+        const reader = new FileReader();
+
+        reader.onload = function(e) {
+          imagePreview.src = e.target.result;
+          previewContainer.style.display = 'block';
+          uploadArea.style.display = 'none';
+          identifyBtn.disabled = false;
+        }
+
+        reader.readAsDataURL(file);
+      }
+    });
+
+    // Handle drag and drop
+    ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+      uploadArea.addEventListener(eventName, preventDefaults, false);
+    });
+
+    function preventDefaults(e) {
+      e.preventDefault();
+      e.stopPropagation();
+    }
+
+    ['dragenter', 'dragover'].forEach(eventName => {
+      uploadArea.addEventListener(eventName, highlight, false);
+    });
+
+    ['dragleave', 'drop'].forEach(eventName => {
+      uploadArea.addEventListener(eventName, unhighlight, false);
+    });
+
+    function highlight() {
+      uploadArea.style.backgroundColor = 'rgba(0, 194, 139, 0.2)';
+    }
+
+    function unhighlight() {
+      uploadArea.style.backgroundColor = '';
+    }
+
+    uploadArea.addEventListener('drop', handleDrop, false);
+
+    function handleDrop(e) {
+      const dt = e.dataTransfer;
+      const file = dt.files[0];
+
+      if (file && file.type.match('image.*')) {
+        fileInput.files = dt.files; // Set the file input's files
+        const reader = new FileReader();
+
+        reader.onload = function(e) {
+          imagePreview.src = e.target.result;
+          previewContainer.style.display = 'block';
+          uploadArea.style.display = 'none';
+          identifyBtn.disabled = false;
+        }
+
+        reader.readAsDataURL(file);
+      }
+    }
+
+    // Handle identify button click
+    identifyBtn.addEventListener('click', function() {
+      // Show loader
+      loader.style.display = 'block';
+      previewContainer.style.display = 'none';
+
+      // Create FormData object
+      const formData = new FormData(uploadForm);
+
+      // Send the image to the server for processing
+      fetch("http://localhost:8000/predict", {
+        method: 'POST',
+        body: formData
+      })
+      .then(response => response.json())
+      .then(data => {
+        // Hide loader
+        loader.style.display = 'none';
+        resultContainer.style.display = 'block';
+
+        if (data.status === 'success') {
+          const prediction = data.prediction;
+          const snakeInfo = prediction.snake_info;
+          const confidence = prediction.confidence.toFixed(2);
+
+          // Display the result
+          resultContent.innerHTML = `
+            <div style="background-color: #1f3538; padding: 1rem; border-radius: 10px; margin-bottom: 1rem;">
+              <h3 style="color: #00c28b; margin-top: 0;">${snakeInfo.name} (${snakeInfo.scientific_name})</h3>
+              <p>Confidence: ${confidence}%</p>
+              <div style="margin: 1rem 0;">
+                <img src="${prediction.prediction_image}" alt="${snakeInfo.name}" style="max-width: 100%; border-radius: 8px;">
+              </div>
+              <p>${snakeInfo.description}</p>
+              <p><strong>Venomous:</strong> ${snakeInfo.venomous}</p>
+            </div>
+            <button class="btn" onclick="resetForm()">Identify Another Snake</button>
+          `;
+        } else {
+          // Display error message
+          resultContent.innerHTML = `
+            <div style="background-color: #3a1f1f; padding: 1rem; border-radius: 10px; margin-bottom: 1rem;">
+              <h3 style="color: #ff6b6b; margin-top: 0;">Error</h3>
+              <p>${data.message || 'An unknown error occurred'}</p>
+            </div>
+            <button class="btn" onclick="resetForm()">Try Again</button>
+          `;
+        }
+      })
+      .catch(error => {
+        // Hide loader
+        loader.style.display = 'none';
+        resultContainer.style.display = 'block';
+
+        // Display error message
+        resultContent.innerHTML = `
+          <div style="background-color: #3a1f1f; padding: 1rem; border-radius: 10px; margin-bottom: 1rem;">
+            <h3 style="color: #ff6b6b; margin-top: 0;">Error</h3>
+            <p>Failed to process the image. Please try again.</p>
+            <p>Technical details: ${error.message}</p>
+          </div>
+          <button class="btn" onclick="resetForm()">Try Again</button>
+        `;
+      });
+    });
+
+    // Reset form function
+    function resetForm() {
+      uploadArea.style.display = 'flex';
+      previewContainer.style.display = 'none';
+      resultContainer.style.display = 'none';
+      fileInput.value = '';
+    }
+  </script>
+</body>
+</html>

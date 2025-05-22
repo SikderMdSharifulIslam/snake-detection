@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Component Interaction</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: white;
+        }
+        .diagram {
+            width: 800px;
+            height: 600px;
+            margin: 20px auto;
+            position: relative;
+        }
+        .component {
+            width: 180px;
+            height: 80px;
+            background-color: white;
+            border: 2px solid #00a278;
+            border-radius: 5px;
+            text-align: center;
+            line-height: 80px;
+            position: absolute;
+        }
+        .interface {
+            width: 20px;
+            height: 80px;
+            background-color: white;
+            border: 2px solid #00a278;
+            border-radius: 10px;
+            position: absolute;
+        }
+        .connector {
+            position: absolute;
+            height: 2px;
+            background-color: #00a278;
+        }
+        .note {
+            position: absolute;
+            width: 180px;
+            padding: 10px;
+            background-color: #f5f5f5;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 12px;
+            line-height: 1.4;
+        }
+        h1 {
+            text-align: center;
+            color: #00a278;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>SnakeGuard Plus - Component Interaction</h1>
+    <div class="diagram">
+        <!-- Components -->
+        <div class="component" style="left: 100px; top: 100px;">Web Frontend</div>
+        <div class="component" style="left: 100px; top: 250px;">HTTP Server</div>
+        <div class="component" style="left: 100px; top: 400px;">Image Processing Service</div>
+        <div class="component" style="left: 400px; top: 100px;">Snake Detection Engine</div>
+        <div class="component" style="left: 400px; top: 250px;">Snake Information Service</div>
+        <div class="component" style="left: 400px; top: 400px;">Data Storage Service</div>
+        
+        <!-- Interfaces -->
+        <div class="interface" style="left: 330px; top: 100px;"></div>
+        <div class="interface" style="left: 330px; top: 250px;"></div>
+        <div class="interface" style="left: 330px; top: 400px;"></div>
+        
+        <!-- Connectors -->
+        <div class="connector" style="left: 190px; top: 140px; width: 140px;"></div>
+        <div class="connector" style="left: 190px; top: 290px; width: 140px;"></div>
+        <div class="connector" style="left: 190px; top: 440px; width: 140px;"></div>
+        <div class="connector" style="left: 190px; top: 140px; width: 2px; height: 300px;"></div>
+        <div class="connector" style="left: 350px; top: 140px; width: 50px;"></div>
+        <div class="connector" style="left: 350px; top: 290px; width: 50px;"></div>
+        <div class="connector" style="left: 350px; top: 440px; width: 50px;"></div>
+        <div class="connector" style="left: 350px; top: 140px; width: 2px; height: 300px;"></div>
+        
+        <!-- Notes -->
+        <div class="note" style="left: 600px; top: 100px;">
+            <strong>Snake Detection Engine</strong><br>
+            YOLO v8 model trained on dataset of 11 snake species. Performs object detection and species classification.
+        </div>
+        <div class="note" style="left: 600px; top: 250px;">
+            <strong>Snake Information Service</strong><br>
+            Provides detailed information about identified snake species, including venomous status and safety recommendations.
+        </div>
+        <div class="note" style="left: 600px; top: 400px;">
+            <strong>Data Storage Service</strong><br>
+            Manages image storage, user sessions, and prediction records. Provides persistence for the system.
+        </div>
+        <div class="note" style="left: 600px; top: 550px;">
+            <strong>Component Interaction</strong><br>
+            Components communicate through well-defined interfaces. The HTTP Server acts as a central coordinator.
+        </div>
+    </div>
+</body>
+</html>

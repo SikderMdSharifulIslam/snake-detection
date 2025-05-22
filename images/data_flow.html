@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Flow</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: white;
+        }
+        .diagram {
+            width: 900px;
+            height: 600px;
+            margin: 20px auto;
+            position: relative;
+        }
+        .component {
+            width: 150px;
+            height: 60px;
+            background-color: white;
+            border: 2px solid #00a278;
+            border-radius: 5px;
+            text-align: center;
+            line-height: 60px;
+            position: absolute;
+        }
+        .database {
+            width: 150px;
+            height: 60px;
+            background-color: white;
+            border: 2px solid #00a278;
+            border-radius: 5px;
+            text-align: center;
+            line-height: 60px;
+            position: absolute;
+        }
+        .database:before {
+            content: "";
+            position: absolute;
+            top: -10px;
+            left: 0;
+            width: 100%;
+            height: 10px;
+            background-color: #00a278;
+            border-radius: 5px 5px 0 0;
+        }
+        .arrow {
+            position: absolute;
+            height: 2px;
+            background-color: #00a278;
+            transform-origin: 0 50%;
+        }
+        .arrow:after {
+            content: "";
+            position: absolute;
+            right: 0;
+            top: -4px;
+            width: 0;
+            height: 0;
+            border-top: 5px solid transparent;
+            border-bottom: 5px solid transparent;
+            border-left: 8px solid #00a278;
+        }
+        .label {
+            position: absolute;
+            font-size: 12px;
+            color: #666;
+            text-align: center;
+            width: 100px;
+        }
+        .user {
+            width: 60px;
+            height: 100px;
+            position: absolute;
+        }
+        .user-head {
+            width: 40px;
+            height: 40px;
+            background-color: white;
+            border: 2px solid #00a278;
+            border-radius: 50%;
+            margin: 0 auto;
+        }
+        .user-body {
+            width: 60px;
+            height: 60px;
+            background-color: white;
+            border: 2px solid #00a278;
+            border-radius: 10px 10px 0 0;
+            margin-top: -2px;
+        }
+        h1 {
+            text-align: center;
+            color: #00a278;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>SnakeGuard Plus - Data Flow</h1>
+    <div class="diagram">
+        <!-- Components -->
+        <div class="user" style="left: 50px; top: 250px;">
+            <div class="user-head"></div>
+            <div class="user-body"></div>
+        </div>
+        <div class="component" style="left: 150px; top: 250px;">Web Interface</div>
+        <div class="component" style="left: 350px; top: 150px;">HTTP Server</div>
+        <div class="component" style="left: 350px; top: 350px;">Image Processor</div>
+        <div class="component" style="left: 550px; top: 150px;">YOLO Model</div>
+        <div class="component" style="left: 550px; top: 350px;">Species Classifier</div>
+        <div class="component" style="left: 750px; top: 250px;">Results Formatter</div>
+        <div class="database" style="left: 550px; top: 500px;">Snake Database</div>
+        <div class="database" style="left: 350px; top: 500px;">Image Storage</div>
+        <div class="database" style="left: 750px; top: 500px;">Prediction Storage</div>
+        
+        <!-- Arrows -->
+        <div class="arrow" style="left: 110px; top: 280px; width: 40px;"></div>
+        <div class="arrow" style="left: 300px; top: 250px; width: 50px; transform: rotate(-45deg);"></div>
+        <div class="arrow" style="left: 300px; top: 280px; width: 50px; transform: rotate(45deg);"></div>
+        <div class="arrow" style="left: 425px; top: 350px; width: 125px;"></div>
+        <div class="arrow" style="left: 425px; top: 380px; width: 50px; transform: rotate(90deg);"></div>
+        <div class="arrow" style="left: 625px; top: 180px; width: 125px;"></div>
+        <div class="arrow" style="left: 625px; top: 350px; width: 125px;"></div>
+        <div class="arrow" style="left: 625px; top: 380px; width: 50px; transform: rotate(90deg);"></div>
+        <div class="arrow" style="left: 750px; top: 310px; width: 50px; transform: rotate(90deg);"></div>
+        <div class="arrow" style="left: 750px; top: 180px; width: 50px; transform: rotate(-90deg);"></div>
+        <div class="arrow" style="left: 700px; top: 250px; width: 50px; transform: rotate(180deg);"></div>
+        <div class="arrow" style="left: 300px; top: 180px; width: 50px; transform: rotate(180deg);"></div>
+        <div class="arrow" style="left: 150px; top: 250px; width: 50px; transform: rotate(180deg);"></div>
+        
+        <!-- Labels -->
+        <div class="label" style="left: 80px; top: 320px;">User</div>
+        <div class="label" style="left: 120px; top: 230px;">1. Upload Image</div>
+        <div class="label" style="left: 270px; top: 180px;">2. Process Request</div>
+        <div class="label" style="left: 400px; top: 450px;">3. Store Image</div>
+        <div class="label" style="left: 450px; top: 330px;">4. Send to Model</div>
+        <div class="label" style="left: 600px; top: 130px;">5. Detect Snake</div>
+        <div class="label" style="left: 600px; top: 330px;">6. Identify Species</div>
+        <div class="label" style="left: 600px; top: 450px;">7. Get Snake Info</div>
+        <div class="label" style="left: 800px; top: 330px;">8. Store Results</div>
+        <div class="label" style="left: 650px; top: 230px;">9. Format Results</div>
+        <div class="label" style="left: 250px; top: 230px;">10. Return Results</div>
+        <div class="label" style="left: 120px; top: 300px;">11. Display Results</div>
+    </div>
+</body>
+</html>
