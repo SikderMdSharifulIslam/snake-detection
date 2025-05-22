@@ -15,10 +15,10 @@ A comprehensive system for detecting and identifying snake species from images u
 - **User-Friendly Interface**: Simple and intuitive web interface for easy interaction
 - **Mobile-Responsive Design**: Access the application from any device
 
-## Demo Video
+## Promo Video URL
 
-<video src="https://github.com/SikderMdSharifulIslam/snake-detection/blob/master/videos/snakeGuardPlusProjectVideo.mp4" controls="controls" style="max-width: 730px;">
-</video>
+https://drive.google.com/drive/folders/1keX0bZFeIGuYo4IqkyGGvPN8S3thi0tO
+
 ## Installation and Setup
 
 ### Prerequisites
